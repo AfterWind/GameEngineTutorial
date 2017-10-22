@@ -2,6 +2,7 @@
 #include <stdbool.h>
 
 #include <SDL2/SDL.h>
+#include <GL/glew.h>
 
 // Pointer to the SDL window
 SDL_Window* window = NULL;
@@ -42,6 +43,24 @@ void initSDL() {
     SDL_GL_SetSwapInterval(1);
 }
 
+// Initialize OpenGL using glew
+void initGL() {
+    // Initialize glew
+    glewInit();
+
+    // Get errors and check if there are any errors
+    // !!! glGetError() resets the error code
+    GLenum error = glGetError();
+    if (error != GL_NO_ERROR) {
+        printf("Error initializing GL\n");
+        // Get the error string and print it in the console
+        printf("%s\n", (const char *) gluErrorString(error));
+    }
+
+    // Nicely print the version of OpenGL that we're using
+    printf("%s\n", glGetString(GL_VERSION));
+}
+
 // Remove all allocated resources for our OpenGL context and window and quit SDL.
 void deleteSDL() {
     SDL_GL_DeleteContext(context);
@@ -52,6 +71,7 @@ void deleteSDL() {
 int main(int argc, char** argv) {
     // Initialize
     initSDL();
+    initGL();
 
     // Place to store events that come from the user/application
     SDL_Event ev;
@@ -68,6 +88,9 @@ int main(int argc, char** argv) {
                 running = false;
             }
         }
+
+        // Swap back with front buffer
+        SDL_GL_SwapWindow(window);
     }
 
     // Clean up
