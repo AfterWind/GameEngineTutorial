@@ -41,9 +41,10 @@ void initSDL() {
     SDL_GL_SetSwapInterval(1);
 }
 
+// Remove all allocated resources for our OpenGL context and window and quit SDL.
 void deleteSDL() {
-    SDL_DestroyWindow(window);
     SDL_GL_DeleteContext(context);
+    SDL_DestroyWindow(window);
     SDL_Quit();
 }
 
