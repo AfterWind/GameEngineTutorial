@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include <SDL2/SDL.h>
 #include <stdbool.h>
+
+#include <SDL2/SDL.h>
 
 // Pointer to the SDL window
 SDL_Window* window = NULL;
