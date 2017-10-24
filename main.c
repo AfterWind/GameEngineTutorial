@@ -81,6 +81,13 @@ int main(int argc, char** argv) {
 
     // A simple draw loop
     while(running) {
+
+        // Specify that we want to clear the color buffer
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        // What color do we use to clear it?
+        glClearColor(0.5f, 0, 0, 1.0f);
+
         // There might be more than 1 event per frame, so Poll every SDL event
         while(SDL_PollEvent(&ev)) {
             // If it's this event, close
