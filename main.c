@@ -35,7 +35,7 @@ void initSDL() {
 
     // Create the window and store a pointer to it.
     // This creates a 1280 by 720 pixels centered window with an OpenGL context.
-    window = SDL_CreateWindow("Exploding chickens", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_OPENGL);
+    window = SDL_CreateWindow("Exploding chickens", 80, 80, 1280, 720, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     // Create the OpenGL context and store a pointer to it.
     context = SDL_GL_CreateContext(window);
 
@@ -81,12 +81,11 @@ int main(int argc, char** argv) {
 
     // A simple draw loop
     while(running) {
+        // What color do we use to clear the window?
+        glClearColor(0.5f, 0, 0, 1.0f);
 
         // Specify that we want to clear the color buffer
         glClear(GL_COLOR_BUFFER_BIT);
-
-        // What color do we use to clear it?
-        glClearColor(0.5f, 0, 0, 1.0f);
 
         // There might be more than 1 event per frame, so Poll every SDL event
         while(SDL_PollEvent(&ev)) {
